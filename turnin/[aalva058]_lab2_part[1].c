@@ -27,11 +27,11 @@ int main(void) {
 	
 	if(tmpA == 0x01){
 
-	tmpB = (tmpB & 0xFC) | 0x01;
+	    tmpB = (tmpB & 0xFC) | 0x01;
         }
 	else{
 
-	tmpB = (tmpB & 0xFC) | 0x02;
+	tmpB = (tmpB & 0xFC) & 0x00;
 	}
 	
 	PORTB = tmpB;
