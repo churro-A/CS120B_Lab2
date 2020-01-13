@@ -27,34 +27,20 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 
-test “4 spaces”
-setPINA 0x00
+test “Greater than 144 and unbalanced”
+setPINA 0x64 
+setPINB 0x40
+setPINC 0x0A
 continue 5
-expectPORTC 0x04
+expectPORTD 0x03
 checkResult
 
-test “3 spaces”
-setPINA 0x08
+test "Greater than 144 and balanced"
+setPINA 0x64
+setPINB 0x40
+setPINC 0x64
 continue 5
-expectPORTC 0x03
-checkResult
-
-test “2 spaces”
-setPINA 0x0C
-continue 5
-expectPORTC 0x02
-checkResult
-
-Test "1 space"
-setPINA 0x0D
-continue 5
-expectPORTC 0x01
-checkResult
-
-Test "0 spaces"
-setPINA 0x0F
-continue 5
-expectPORTC 0x00
+expectPORTD 0x01
 checkResult
 
 

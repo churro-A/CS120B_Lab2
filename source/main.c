@@ -14,63 +14,40 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-     DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
-     DDRC = 0xFF; PORTC = 0x00; // Configure port B's 8 pins as outputs
+        DDRA = 0x00; PORTA = 0xFF;
+        DDRB = 0x00; PORTB = 0xFF;
+	DDRC = 0x00; PORTC = 0xFF;		 // Configure port A's 8 pins as inputs
+     	DDRD = 0xFF; PORTD = 0x00; // Configure port B's 8 pins as outputs
 	
-     unsigned char Aspace = 0x00; // Temporary variable to hold the value of B
-     unsigned char tmpA = 0x00; // Temporary variable to hold the value of A
+     unsigned short weight = 0x00; // Temporary variable to hold the value of B
+     unsigned short shift = 0x00;  // Temporary variable to hold the value of A
 
 	
     /* Insert your solution below */
     	
 	while (1) {
 	
-	tmpA = PINA & 0x0F;
-
-	switch(tmpA){
-
-	case 0x00:
-		Aspace = 0x04;
-		break;
-
-	//4 space
+		weight = PINA + PINB + PINC;
+		
 	
-	case 0x01:
-	case 0x02:
-	case 0x04:
-	case 0x08:
-		Aspace = 0x03;
-		break;
-	// 3 spaces ava
-	case 0x03:
-	case 0x06:
-	case 0x0C:
-	case 0x09:
-	case 0x0A:
-	case 0x05:
-		Aspace = 0x02;
-		break;
-	// 2 space available
-	//
-	case 0x0E:
-	case 0x0D:
-	case 0x0B:
-	case 0x07:
-		Aspace = 0x01;
-		break;
-	// 1 space
-	//
-	case 0x0F:
-		Aspace = 0x00;
-		break;
-	// 0 space
+		if(weight > 0x90){
+			if((PINA - PINC) > 0x50 ){
+				
+				PORTD = 0x03;
+				
+			}
+			else{
+				PORTD = 0x01;
+			}
+		}
+			
+		else{
+			PORTD = 0x00;
+		}	
 	
-	default:
-		Aspace = 0x04;
-		break;
+	
+	
 	}
-	PORTC = Aspace;
-	
-    }
+    
 	return 0;
 }
