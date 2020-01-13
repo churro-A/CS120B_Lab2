@@ -20,7 +20,7 @@ int main(void) {
      	DDRD = 0xFF; PORTD = 0x00; // Configure port B's 8 pins as outputs
 	
      unsigned short weight = 0x00; // Temporary variable to hold the value of B
-     unsigned short shift = 0x00;  // Temporary variable to hold the value of A
+//     unsigned short shift = 0x00;  // Temporary variable to hold the value of A
 
 	
     /* Insert your solution below */
@@ -31,23 +31,61 @@ int main(void) {
 		
 	
 		if(weight > 0x90){
-			if((PINA - PINC) > 0x50 ){
+			if(PINA >= PINC ){
+				 
+				if((PINA - PINC) > 0x50 ){
 				
-				PORTD = 0x03;
+					PORTD = 0x03;
 				
+				}
+				else{
+					PORTD = 0x01;
+				}
 			}
-			else{
-				PORTD = 0x01;
+			if(PINC >= PINA){
+				if ((PINC - PINA ) > 0x50){
+
+					PORTD = 0x03;
+
+				}
+				else{
+					PORTD = 0x01;
+
+				}
 			}
 		}
-			
+		else if (weight <= 0x90){
+			 if(PINA >= PINC ){
+
+                                if((PINA - PINC) > 0x50 ){
+
+                                        PORTD = 0x03;
+
+                                }
+                                else{
+                                        PORTD = 0x01;
+                                }
+                        }
+                        if(PINC >= PINA){
+                                if ((PINC - PINA ) > 0x50){
+
+                                        PORTD = 0x03;
+
+                                }
+                                else{
+                                        PORTD = 0x01;
+
+                                }
+                        }
+	
+
+		}
 		else{
 			PORTD = 0x00;
-		}	
-	
-	
+		}		
 	
 	}
     
 	return 0;
 }
+
